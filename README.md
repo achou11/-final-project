@@ -1,2 +1,1 @@
-# -final-project
- Final Project for Software Engineering Course
+# Final Project for Software Engineering Course
