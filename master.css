@@ -1,0 +1,32 @@
+@import url("user.css");
+@import url("admin.css");
+@import url("menu.css");
+
+
+html *
+{
+
+   color: white;
+
+}
+
+/*
+@font-face {
+	font-family: chalk;
+	src: url('chalk.ttf');
+}
+
+html *
+{
+   font-family: chalk !important;
+   color: black !important;
+   background: none;
+}
+
+body{
+    background-image: url('../uploads/background.jpg');
+    background-size:cover;
+    background-repeat: no-repeat;
+	
+}
+*/
