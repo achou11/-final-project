@@ -20,8 +20,8 @@
 	  header("Location: admin.php");
 	  exit;
 	}
-		
-	$leadersQuery = mysqli_query($conn, "SELECT userId, userName, userPoints FROM users WHERE userAdmin NOT IN (SELECT userAdmin FROM users WHERE userAdmin = 1) ORDER BY userPoints DESC LIMIT 10");
+	$guildName =  $userRow['userGuild'];
+	$reportQuery = mysqli_query($conn, "SELECT userName, userPoints FROM users WHERE userGuild = '".$guildName."'");
 //	$leadersRow=mysqli_fetch_array($leadersQuery);
 ?>
 
@@ -69,12 +69,9 @@
 				</ul>
 			</li>
 			<li><a href="#">Score: <?php echo $userRow['userPoints']?></a>
-				<ul>
-					<li><a href="#">Stats</a></li>
-					<li><a href="#">Leaderboard</a></li>
-				</ul>
 			</li>
 			<li><a href="#">Level: <?php echo (int)($userRow['userPoints'])/10 ?></a></li>
+			<li><a href="#">Progress: <?php echo (int)($userRow['userPoints'])?> /30 </a></li>			
 			<li><a href="#" class="last">GUILD: <?php echo $userRow['userGuild'] ?></a></li>
 			
 			<li style = "float: right"><a href="logout.php?logout">Sign Out</a></li>
@@ -98,6 +95,12 @@
 	</div>
 	<br>
 	<br>
+	
+	<br>
+	<br>
+	
+	
+	<br>
 	<br>
 	
 	<div style = "float: left; border: 1px solid white;">
@@ -111,7 +114,40 @@
 	    </table>
 	    
 	</div>
-
+    <br>
+    <br>
+    <button id = "toggle" onClick="toggle()" style="color: black !important;">See Report for Your Guild</button>
+    <br>
+      <table id = "report" style = "position: relative; left: 50%; display: none;">
+          <tr><td>Report for <?php echo($userRow['userGuild']) ?></td></tr>
+        <tr>
+          <th>Username</th>
+          <th>Score</th>
+        </tr>
+      <?php
+        $rank = 1;
+        while($reportRow = mysqli_fetch_array($reportQuery)){
+              echo
+                  "<tr><td>"
+                  .$reportRow['userName'].
+                  "</td><td>"
+                  .$reportRow["userPoints"].
+                  "</td></tr>";
+              $rank++;
+        }
+      ?>
+        
+      </table>
+      <script>
+          function toggle(){
+              table = document.getElementById("report");
+              if (table.style.display === ""){
+                  table.style.display = "none"
+              } else {
+                  table.style.display = ""
+              }
+          }
+      </script>
 </body>
 <!--
 <body>

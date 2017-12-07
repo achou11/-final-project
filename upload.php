@@ -3,6 +3,7 @@ require_once 'dbconnect.php';
 
 $dName = $_POST['fileName'];
 $fName = basename($_FILES["fileToUpload"]["name"], '.pdf');
+$skillLevel = $_POST['skillLevel'];
 $fDifficulty = $_POST['fileDifficulty'];
 $target_dir = "guilds/".$dName."/";
 
@@ -29,7 +30,7 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        $query = "INSERT INTO files(fileName, fileDifficulty) VALUES('$fName','$fDifficulty')";
+        $query = "INSERT INTO files(fileName, fileDifficulty, fileSkillLevel) VALUES('$fName','$fDifficulty','$skillLevel')";
 			$res = mysqli_query($conn, $query);
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
     } else {

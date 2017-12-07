@@ -78,6 +78,7 @@
     function validateForm() {
         var x = document.forms["uploadForm"]["fileName"].value;
         var y = document.forms["uploadForm"]["fileDifficulty"].value;
+        var z = document.forms["uploadForm"]["skillLevel"].value;
         if (x == "") {
             alert("Skill Name must be filled out");
             return false;
@@ -85,7 +86,12 @@
         if (y == "") {
             alert("Difficulty must be filled out");
             return false;
-        }        
+        }
+        if (z == "") {
+            alert("Skill Levels must be filled out");
+            return false;
+        }
+        
     }    
 </script>
 </head>
@@ -94,30 +100,7 @@
   <div>
 	<nav id="nav">
 		<ul id="navigation">
-			<li><a href="#" class="first">Home</a></li>
-			<li><a href="#">Skills &raquo;</a>
-				<ul>
-					<li><a href="#">Math</a>
-						<ul>
-							<li><a href="guilds/math/math1.php">math1</a></li>
-						</ul>
-					</li>
-					<li><a href="#">Physics</a>
-						<ul>
-							<li><a href="#">Physics#1</a></li>
-							<li><a href="#">Physics#2</a></li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-			<li><a href="#">Score: <?php echo $userRow['userPoints']?></a>
-				<ul>
-					<li><a href="#">Stats</a></li>
-					<li><a href="#">Leaderboard</a></li>
-				</ul>
-			</li>
-			<li><a href="#" class="last">GUILD: <?php echo $userRow['userGuild'] ?></a></li>
-			
+
 			<li style = "float: right"><a href="logout.php?logout">Sign Out</a></li>
 		</ul>
 	</nav>
@@ -215,7 +198,7 @@
       <br>
       <br>
     <form name = "uploadForm" action="upload.php" onsubmit = "return validateForm()" method="post" enctype="multipart/form-data">
-      Select file/quest to upload <br>
+      Select file/quest to upload, please include the Difficulty level next to each question within the PDF file! <br>
       (only JPG, JPEG, PNG & GIF, and txt files are allowed):
       <br>
       
@@ -230,7 +213,7 @@
       </select>
         <br>
         <br>
-      Difficulty: 
+      Average Difficulty: 
       <select name="fileDifficulty" id = "fileDifficulty">
           <option value="" disabled selected>Select Difficulty</option>
         <option value='0'>0</option>
@@ -244,6 +227,7 @@
     <br>
     <br>      
     <br>
+    Skill Levels: <input type="text" id = "skillLevel" name="skillLevel"><br>
     <br>
     <br>
       <input id = "submitFile" type="submit" value="Upload File" name="submit">
